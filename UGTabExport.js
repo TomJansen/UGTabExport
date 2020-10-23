@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         UG
+// @name         UGTabExport
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  Download Ultimate guitar tabs as songs tex file!
-// @author       You
+// @author       Tom Jansen
 // @include      https://tabs.ultimate-guitar.com/tab/*/*
 // @grant        GM.xmlHttpRequest
 // @grant        GM_getResourceText
