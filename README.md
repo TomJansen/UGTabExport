@@ -10,4 +10,4 @@ Click [HERE](https://github.com/TomJansen/UGTabExport/raw/main/UGTabExport.js) t
 This userscript uses:
 - Tampermonkey
 - [ChordSheetJS](https://github.com/martijnversluis/ChordSheetJS) for conversion of the tab.
-- A JavaScript inplementation of the UG api, reverse engeneerd by [Pilfer](https://github.com/Pilfer/ultimate-guitar-scraper)
+- A JavaScript implementation of the UG api, reverse engineered by [Pilfer](https://github.com/Pilfer/ultimate-guitar-scraper)
