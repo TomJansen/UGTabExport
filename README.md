@@ -4,7 +4,7 @@ This userscript adds a button to any tab on ultimate-guitar.com in order to down
 See also my `songs` template [HERE](https://github.com/TomJansen/UltimateGuitarChordbook) to make a nicely styled chordbook specially for guitarists. That was my primaray motivation for making this script.
 
 ## Installation
-Click [HERE](https://github.com/TomJansen/UGTabExport/raw/main/UGTabExport.js) to install this userscript!
+Click [HERE](https://github.com/TomJansen/UGTabExport/raw/main/UGTabExport.user.js) to install this userscript!
 
 ## Under the hood
 This userscript uses:
