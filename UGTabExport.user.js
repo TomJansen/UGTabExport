@@ -43,7 +43,6 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
         return arr1.join('');
     }
 
-
     // Generates a new device id for the scraper instances. This value is used in the request headers and to generate X-UG-API-KEY.
     function generateDeviceID() {
         return randHex(16);
@@ -62,13 +61,19 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
         }, 0);
     }
 
-    function formattedTab(tab) {
+    function formattedTab(tab, choice) {
         // TODO get current integer for chord variations from _3F8xq in GQmjk _3ompm class and add these before parsing
         const chordSheet = tab.content;
-        const parser = new ChordSheetJS.default.ChordProParser();
+        const parser = new ChordSheetJS.default.ChordProParser(); //TODO edit this to upcoming UltimateGuitar Parser
         const song = parser.parse(chordSheet);
 
-        const formatter = new ChordSheetJS.default.TextFormatter();
+		const formatter = new ChordSheetJS.default.TextFormatter();
+		if (choice == 'ChordPro') {
+			const formatter = new ChordSheetJS.default.ChordProFormatter();;
+		} else if (choice=='LaTeX') {
+			const formatter = new ChordSheetJS.default.LatexFormatter();
+		}
+
         const disp = formatter.format(song);
 
         return disp
@@ -91,7 +96,7 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
         return hash
     }
 
-    function getTabFromId(tabId) {
+    function getTabFromId(tabId, choice) {
         var ugAPIEndpoint = "https://api.ultimate-guitar.com/api/v1";
         var TAB_INFO = "/tab/info";
         var ugUserAgent = "UGT_ANDROID/4.11.1 (Pixel; 8.1.0)";
@@ -116,25 +121,26 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
                 const tab = JSON.parse(response.responseText);
                 console.log(tab)
                 var filename = `${tab.song_name} - ${tab.artist_name}.tex`
-                downloadFile(formattedTab(tab), filename, 'text')
+                downloadFile(formattedTab(tab, choice), filename, 'text')
             }
         });
     }
 
-    function createDownloadButton() {
+    function createDownloadButton(choice) {
         // Make the download button
         var a = document.createElement ('a');
         a.setAttribute ('class', '_27k0J _3z5oh _3EpOX _14ZfT YJMQR _2pMPQ');
-        a.setAttribute ('id', 'texDownload');
-        a.innerHTML = 'Download LaTeX tab';
+        a.setAttribute ('id', choice);
+        a.innerHTML = `Download ${choice} tab`;
         document.getElementsByClassName("_2SfEm KnbhI")[1].appendChild (a);
+
+		document.getElementById(choice).addEventListener('click', function(){ //listen for button click
+			var url = window.location.href
+			var tabId = url.match(/[0-9]*$/gm); // the tabId is the number at the end of an url
+			getTabFromId(tabId[0], choice);
+		});
     }
 
-    createDownloadButton()
-
-    document.getElementById("texDownload").addEventListener('click', function(){ //listen for button click
-        var url = window.location.href
-        var tabId = url.match(/[0-9]*$/gm); // the tabId is the number at the end of an url
-        getTabFromId(tabId[0]);
-    });
+	createDownloadButton('ChordPro');
+    createDownloadButton('LaTeX');
 });
