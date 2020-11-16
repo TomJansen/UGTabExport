@@ -13,4 +13,4 @@ This userscript uses:
 - A JavaScript implementation of the UG api, reverse engineered by [Pilfer](https://github.com/Pilfer/ultimate-guitar-scraper)
 
 ## TODO
-This script does currently not work, because ChordSheetJS needs to merge 2 nescessary pull request: 1 for parsing the Ultimate Guitar tabs and 1 to convert it to LaTeX. This will happen soon however. And when this happens this script will be automatically updated. I will remove this disclaimer when the pull requests are merged.
+This script does currently not work, because ChordSheetJS needs to merge the nescessary pull request to convert a chordsheet to LaTeX. This functionality will be merged soon however. And when this happens this script will be updated. I will remove this disclaimer when the pull request is merged.
