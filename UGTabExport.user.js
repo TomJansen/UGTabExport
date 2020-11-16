@@ -9,7 +9,7 @@
 // @grant        GM_getResourceText
 // @require      https://github.com/plohoj/userscript-requirejs/releases/download/0.0.1/userscript-require.js
 // @resource     requirejs   https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js
-// @resource     ChordSheetJS https://wzrd.in/standalone/chordsheetjs@latest
+// @resource     ChordSheetJS https://wzrd.in/standalone/chordsheetjs@3.2.0
 // ==/UserScript==
 /* globals require */
 
@@ -29,7 +29,7 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
         var randHex = [];
         for (var i = 0; i < len; i++) {
             var hex = letters[Math.floor(Math.random() * 16)];
-			randHex.push(hex);
+	    randHex.push(hex);
         }
         return randHex.join('');
     }
@@ -63,23 +63,23 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
 
     function formattedTab(tab, choice) {
         // TODO get current integer for chord variations from _3F8xq in GQmjk _3ompm class and add these before parsing
-        const chordSheet = tab.content;
-        const parser = new ChordSheetJS.default.ChordProParser(); //TODO edit this to upcoming UltimateGuitar Parser
+        var formatter;
+        const chordSheet = tab.content.replaceAll('[ch]','').replaceAll('[/ch]','').replaceAll('[tab]','').replaceAll('[/tab]','');
+        const parser = new ChordSheetJS.default.UltimateGuitarParser();
         const song = parser.parse(chordSheet);
 
-		const formatter = new ChordSheetJS.default.TextFormatter();
-		if (choice == 'ChordPro') {
-			const formatter = new ChordSheetJS.default.ChordProFormatter();;
-		} else if (choice=='LaTeX') {
-			const formatter = new ChordSheetJS.default.LatexFormatter();
-		}
+	if (choice == 'ChordPro') {
+		formatter = new ChordSheetJS.default.ChordProFormatter();;
+	} else if (choice == 'LaTeX') {
+		formatter = new ChordSheetJS.default.LatexFormatter();
+	}
 
         const disp = formatter.format(song);
 
         return disp
     }
 
-	// Generate the X-UG-API-KEY for this request
+    // Generate the X-UG-API-KEY for this request
     function generateAPIKey(deviceID) {
         //generate date
         var date = new Date();
@@ -133,14 +133,13 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
         a.setAttribute ('id', choice);
         a.innerHTML = `Download ${choice} tab`;
         document.getElementsByClassName("_2SfEm KnbhI")[1].appendChild (a);
-
-		document.getElementById(choice).addEventListener('click', function(){ //listen for button click
-			var url = window.location.href
-			var tabId = url.match(/[0-9]*$/gm); // the tabId is the number at the end of an url
-			getTabFromId(tabId[0], choice);
-		});
+	document.getElementById(choice).addEventListener('click', function(){ //listen for button click
+	    var url = window.location.href
+	    var tabId = url.match(/[0-9]*$/gm); // the tabId is the number at the end of an url
+	    getTabFromId(tabId[0], choice);
+	});
     }
 
-	createDownloadButton('ChordPro');
+    createDownloadButton('ChordPro');
     createDownloadButton('LaTeX');
 });
