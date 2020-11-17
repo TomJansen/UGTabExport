@@ -141,5 +141,5 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
     }
 
     createDownloadButton('ChordPro');
-    createDownloadButton('LaTeX');
+    //createDownloadButton('LaTeX');
 });
