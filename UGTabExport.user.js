@@ -65,7 +65,7 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
         // TODO get current integer for chord variations from _3F8xq in GQmjk _3ompm class and add these before parsing
         var formatter;
         const chordSheet = tab.content.replaceAll('[ch]','').replaceAll('[/ch]','').replaceAll('[tab]','').replaceAll('[/tab]','');
-        const parser = new ChordSheetJS.default.UltimateGuitarParser();
+        const parser = new ChordSheetJS.default.UltimateGuitarParser({preserveWhitespace: false});
         const song = parser.parse(chordSheet);
 
 	if (choice == 'ChordPro') {
