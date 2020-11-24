@@ -120,7 +120,7 @@ require(['ChordSheetJS'], (ChordSheetJS) => {
                 //response.responseText must be converted to a json object
                 const tab = JSON.parse(response.responseText);
                 console.log(tab)
-                var filename = `${tab.song_name} - ${tab.artist_name}.tex`
+                var filename = `${tab.artist_name} - ${tab.song_name}.tex`
                 downloadFile(formattedTab(tab, choice), filename, 'text')
             }
         });
